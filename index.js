@@ -5,6 +5,7 @@ let precipitationData = document.querySelector("#precipitation");
 let humidity = document.querySelector("#humidity");
 let wind = document.querySelector("#wind");
 let searchElement = document.querySelector("#search-id");
+let iconElement = document.querySelector("#icon");
 function changeDate() {
     let days = [
         "Sunday",
@@ -19,9 +20,10 @@ function changeDate() {
     let timeLine = document.querySelector("li#time");
     console.log(timeLine);
     let date = new Date();
+    let minutes = date.getMinutes()<10?`0${date.getMinutes()}`:`${date.getMinutes()}`;
     timeLine.innerHTML = ` ${
         days[date.getDay()]
-    } ${date.getHours()}:${date.getMinutes()}`;
+    } ${date.getHours()}:${minutes}`;
 }
 
 function getWeatherData(response) {
@@ -36,6 +38,12 @@ function getWeatherData(response) {
     searchElement.innerHTML='';
     description .innerHTML =
         response.data.weather[0].main;
+
+    iconElement.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 function search(event) {
