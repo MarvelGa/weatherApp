@@ -6,6 +6,7 @@ let humidity = document.querySelector("#humidity");
 let wind = document.querySelector("#wind");
 let searchElement = document.querySelector("#search-id");
 let iconElement = document.querySelector("#icon");
+let celsiusTemperature=null;
 function changeDate() {
     let days = [
         "Sunday",
@@ -31,7 +32,11 @@ function getWeatherData(response) {
     cityElement.innerHTML = response.data.name;
     let temperature = document.querySelector(".temperature");
     let temp = Math.round(response.data.main.temp);
-    temperature.innerHTML = `${temp}°`;
+
+    celsiusTemperature = Math.round(response.data.main.temp);
+
+/*    temperature.innerHTML = `${temp}`;*/
+    temperature.innerHTML = celsiusTemperature;
     precipitationData.innerHTML = `Precipitation:${response.data.main.temp}%`;
     humidity.innerHTML =`Humidity: ${response.data.main.humidity}%`;
     wind.innerHTML = `Wind: ${response.data.wind.speed}mph`;
@@ -56,12 +61,19 @@ function search(event) {
 
 function getInCelsius(event) {
     event.preventDefault();
+    toCelsius.classList.add("active");
+    toFahrenheit.classList.remove("active");
+    let temperature = document.querySelector(".temperature");
+    temperature.innerHTML = Math.round(celsiusTemperature);
 }
 
 function getInFahrenheit(event) {
     event.preventDefault();
+    toCelsius.classList.remove("active");
+    toFahrenheit.classList.add("active");
     let temperature = document.querySelector(".temperature");
-    temperature.innerHTML = "15";
+    let fahrenheitTemperature=(celsiusTemperature*9)/5+32;
+    temperature.innerHTML = Math.round(fahrenheitTemperature);
 }
 
 changeDate();
@@ -73,6 +85,7 @@ toFahrenheit.addEventListener("click", getInFahrenheit);
 
 let toCelsius = document.querySelector("#celsius");
 toCelsius.addEventListener("click", getInCelsius);
+
 
 
 function showCurrentData(position) {

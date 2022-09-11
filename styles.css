@@ -52,3 +52,16 @@ form {
 #source{
     margin: 0 27%;
 }
+
+.weather-temperature .active{
+    color: rgb(33, 33, 33);
+    cursor: default;
+}
+
+.weather-temperature a{
+    text-decoration: none;
+}
+
+.active:hover{
+    text-decoration: underline;
+}
