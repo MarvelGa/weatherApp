@@ -1,7 +1,7 @@
 let apiKey = "25b374b9eb471f1d081d7663d3ba9153";
 let currentButton = document.querySelector("#current-location-button");
 let description = document.querySelector("#description");
-let precipitationData = document.querySelector("#precipitation");
+/*let precipitationData = document.querySelector("#precipitation");*/
 let humidity = document.querySelector("#humidity");
 let wind = document.querySelector("#wind");
 let searchElement = document.querySelector("#search-id");
@@ -22,10 +22,13 @@ function changeDate() {
     console.log(timeLine);
     let date = new Date();
     let minutes = date.getMinutes()<10?`0${date.getMinutes()}`:`${date.getMinutes()}`;
-    timeLine.innerHTML = ` ${
+    timeLine.innerHTML = `Last updated: ${
         days[date.getDay()]
     } ${date.getHours()}:${minutes}`;
 }
+
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Kyiv&appid=${apiKey}&units=metric`;
+axios.get(apiUrl).then(getWeatherData);
 
 function getWeatherData(response) {
     let cityElement = document.querySelector("#displayed-city");
@@ -35,9 +38,8 @@ function getWeatherData(response) {
 
     celsiusTemperature = Math.round(response.data.main.temp);
 
-/*    temperature.innerHTML = `${temp}`;*/
     temperature.innerHTML = celsiusTemperature;
-    precipitationData.innerHTML = `Precipitation:${response.data.main.temp}%`;
+/*    precipitationData.innerHTML = `Precipitation:${response.data.main.temp}%`;*/
     humidity.innerHTML =`Humidity: ${response.data.main.humidity}%`;
     wind.innerHTML = `Wind: ${response.data.wind.speed}mph`;
     searchElement.innerHTML='';
