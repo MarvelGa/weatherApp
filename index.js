@@ -59,6 +59,10 @@ function displayForecast(){
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Kyiv&appid=${apiKey}&units=metric`;
 axios.get(apiUrl).then(getWeatherData);
 
+function getForecast(coordinates){
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`;
+    axios.get(apiUrl).then(displayForecast);}
+
 function getWeatherData(response) {
     let cityElement = document.querySelector("#displayed-city");
     cityElement.innerHTML = response.data.name;
@@ -80,9 +84,11 @@ function getWeatherData(response) {
         `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
     iconElement.setAttribute("alt", response.data.weather[0].description);
+    getForecast(response.data.coord);
+
 }
 
-displayForecast();
+/*displayForecast();*/
 
 function search(event) {
     event.preventDefault();
