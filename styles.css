@@ -22,6 +22,7 @@ li {
     line-height: 1px;
     list-style: none;
 }
+
 img {
     position: relative;
     top: -14px;
@@ -31,6 +32,7 @@ img {
 form {
     margin-bottom: 20px;
 }
+
 .weather-app {
     border: 1px solid #dadde1;
     padding: 20px;
@@ -49,22 +51,24 @@ form {
     position: relative;
     top: -32px;
 }
-#source{
+
+#source {
     margin: 0 27%;
 }
 
-.weather-temperature .active{
+.weather-temperature .active {
     color: rgb(33, 33, 33);
     cursor: default;
 }
 
-.weather-temperature a{
+.weather-temperature a {
     text-decoration: none;
 }
 
-.active:hover{
+.active:hover {
     text-decoration: underline;
 }
+
 .weather-forecast {
     margin-top: 20px;
     text-align: center;
